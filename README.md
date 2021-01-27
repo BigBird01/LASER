@@ -1,2 +1,2 @@
-# LASER (a training toolkit for **L**arge sc**A**le di**S**tribut**E**d t**R**aining)
+# LASER (a training toolkit for Large scAle diStributEd tRaining)
 A training toolkit for large scale distributed training
