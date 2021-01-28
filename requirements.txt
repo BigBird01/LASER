@@ -1,0 +1,7 @@
+numpy
+pytest
+regex
+tqdm
+ujson
+psutil
+torch
