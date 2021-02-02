@@ -12,7 +12,7 @@ from ..utils import boolean_string
 __all__ = ['get_args']
 
 def get_args():
-  parser=argparse.ArgumentParser(add_help=False)
+  parser=argparse.ArgumentParser(add_help=False, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
   group = parser.add_argument_group(title='Trainer', description='Parameters for the distributed trainer')
   group.add_argument('--accumulative_update',
             type=int,
@@ -20,7 +20,7 @@ def get_args():
             help="Number of updates steps to accumulate before performing a backward/update pass.")
 
   group.add_argument("--dump_interval",
-            default=10000,
+            default=1000,
             type=int,
             help="Interval steps for generating checkpoint.")
 
@@ -45,7 +45,7 @@ def get_args():
             help="random seed for initialization")
 
   group.add_argument("--train_batch_size",
-            default=32,
+            default=64,
             type=int,
             help="Total batch size for training.")
 

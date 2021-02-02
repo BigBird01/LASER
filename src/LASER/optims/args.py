@@ -13,7 +13,7 @@ from ..utils import boolean_string
 
 __all__ = ['get_args']
 def get_args():
-  parser=argparse.ArgumentParser(add_help=False)
+  parser=argparse.ArgumentParser(add_help=False, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
   group = parser.add_argument_group(title='Optimizer', description='Parameters for the distributed optimizer')
   group.add_argument('--fp16',
             default=False,
@@ -21,11 +21,11 @@ def get_args():
             help="Whether to use 16-bit float precision instead of 32-bit")
 
   group.add_argument('--loss_scale',
-            type=float, default=256,
+            type=float, default=16384,
             help='Loss scaling, positive power of 2 values can improve fp16 convergence.')
 
   group.add_argument('--scale_steps',
-            type=int, default=1000,
+            type=int, default=250,
             help='The steps to wait to increase the loss scale.')
 
   group.add_argument('--lookahead_k',
@@ -91,7 +91,7 @@ def get_args():
             type=float,
             help="The beta2 parameter for Adam.")
 
-  parser.add_argument('--weight_decay',
+  group.add_argument('--weight_decay',
             type=float,
             default=0.01,
             help="The weight decay rate")
