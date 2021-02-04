@@ -172,7 +172,9 @@ class Fp16Optimizer(object):
 
       if wd > 1:
         flattened_grads /= wd
-      handle = dist.all_reduce(flattened_grads, async_op=True)
+        handle = dist.all_reduce(flattened_grads, async_op=True)
+      else:
+        handle = None
       return flattened_grads, handle
 
     def _process_grad(group, flattened_grads, max_grad, norm):

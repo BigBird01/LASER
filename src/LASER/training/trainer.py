@@ -80,7 +80,7 @@ class DistributedTrainer:
     self.accumulative_update = 1
     if hasattr(args, 'accumulative_update'):
       self.accumulative_update = args.accumulative_update
-
+    
     train_data, training_steps, train_sampler = data_fn(self)
     self.train_data = train_data
     self.train_sampler = train_sampler if train_sampler is not None else RandomSampler(len(train_data))
@@ -94,11 +94,13 @@ class DistributedTrainer:
     self.init_fn = init_fn
     self.trainer_state = TrainerState(self.training_steps)
     self.dump_interval = dump_interval
+
     self.model = self._setup_model(args, model)
 
     def _opt_fn(trainer, model, training_steps):
       return create_xoptimizer(model, args, num_train_steps = training_steps)
     optimizer_fn = optimizer_fn if optimizer_fn is not None else _opt_fn
+
     self.optimizer = optimizer_fn(self, model, training_steps)
 
     def _loss_fn(trainer, model, batch):
